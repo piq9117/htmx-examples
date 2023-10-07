@@ -5,6 +5,7 @@
 module Index
   ( index,
     renderPage,
+    renderPageWithIndex,
   )
 where
 
@@ -37,5 +38,8 @@ integrity = Html.attribute "integrity" "integrity=\""
 crossOrigin :: Html.AttributeValue -> Html.Attribute
 crossOrigin = Html.attribute "crossOrigin" "crossorigin=\""
 
+renderPageWithIndex :: Html.Html -> Scotty.ActionM ()
+renderPageWithIndex = renderPage <<< index
+
 renderPage :: Html.Html -> Scotty.ActionM ()
-renderPage = Scotty.html <<< Html.renderHtml <<< index
+renderPage = Scotty.html <<< Html.renderHtml
