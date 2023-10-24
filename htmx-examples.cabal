@@ -69,6 +69,7 @@ library
 
   -- Modules exported by the library.
   exposed-modules:
+    BulkUpdate
     ClickToEdit
     Index
     Server
@@ -81,12 +82,14 @@ library
 
   -- Other library packages from which modules are imported.
   build-depends:
+    , aeson
     , base
     , blaze-html
     , blaze-htmx
     , blaze-markup
     , relude
     , scotty
+    , wai-extra
     , warp
 
   -- Directories containing source files.
@@ -115,3 +118,12 @@ executable click-to-edit
 
   -- Directories containing source files.
   hs-source-dirs: app/click-to-edit
+
+executable bulk-update
+  import:         common-opts, exe-opts
+  main-is:        Main.hs
+  build-depends:
+    , base
+    , htmx-examples
+
+  hs-source-dirs: app/bulk-update
