@@ -14,9 +14,7 @@
     {
       overlay = self: super: {
         hsPkgs = super.haskell.packages.ghc944.override {
-          overrides = hself: hsuper: {
-            ghcid = super.haskell.lib.dontCheck hsuper.ghcid;
-          };
+          overrides = hself: hsuper: { };
         };
       };
       devShells = forAllSystems (system:
