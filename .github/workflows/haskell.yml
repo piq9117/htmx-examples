@@ -1,0 +1,31 @@
+name: Haskell CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  check_nix:
+    name: Build Project
+    runs-on: ubuntu-latest
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v3
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Check Nixpkgs inputs
+        uses: DeterminateSystems/flake-checker-action@main
+        with:
+          fail-mode: true
+      - name: Install Dependencies
+        run: |
+          nix develop --command cabal update
+          nix develop --command cabal build --only-dependencies --enable-tests --enable-benchmarks
+      - name: Build
+        run: nix develop --command cabal build --only-dependencies --enable-tests --enable-benchmarks all

@@ -1,7 +1,7 @@
 {
   description = "Basic haskell cabal template";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/23.05";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
   outputs = { self, nixpkgs }:
     let
@@ -13,7 +13,7 @@
     in
     {
       overlay = self: super: {
-        hsPkgs = super.haskell.packages.ghc944.override {
+        hsPkgs = super.haskell.packages.ghc947.override {
           overrides = hself: hsuper: { };
         };
       };
